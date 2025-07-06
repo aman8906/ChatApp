@@ -30,10 +30,9 @@ try {
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
 
-// ✅ Serve frontend build
-app.use(express.static("frontend/dist"));
-app.get("*", (req, res) => {
-    res.sendFile("index.html", { root: "frontend/dist" });
+// ✅ Root check (for Render health check)
+app.get("/", (req, res) => {
+  res.send("✅ SkillCart Backend is Running");
 });
 
 // Start server
