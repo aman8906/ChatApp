@@ -29,6 +29,16 @@ try {
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
 
+
+// ✅ Serve frontend (React build from client/dist)
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/dist/index.html"));
+});
+
+
 server.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
 });
